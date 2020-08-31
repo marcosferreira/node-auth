@@ -2,9 +2,14 @@ import User from '../models/User';
 
 class UserController {
   async index(request, response) {
-    const user = await User.find();
+    try {
+      const users = await User.find();
 
-    return response.status(200).json(user);
+      return response.status(200).json(users);
+    } catch (error) {
+      return response.status(401).json({ error: error.message });
+    }
+
   }
 
   async store(request, response) {}

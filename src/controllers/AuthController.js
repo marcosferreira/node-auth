@@ -35,6 +35,12 @@ class AuthController {
     }
   }
 
+  async me(request, response) {
+    const user = request.auth;
+
+    return response.status(200).json({ user });
+  }
+
   async forgotPassword(request, response) {}
 
 }
