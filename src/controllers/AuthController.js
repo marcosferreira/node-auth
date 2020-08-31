@@ -1,6 +1,5 @@
-import jwt from 'jsonwebtoken';
-
 import User from '../models/User';
+import * as jwt from '../utils/jwt';
 
 class AuthController {
   async signup(request, response) {
@@ -8,7 +7,7 @@ class AuthController {
       const user = await User.create(request.body);
       user.password = undefined;
 
-      const token = jwt.sign({ user: user.id }, process.env.SECRET_KEY);
+      const token = jwt.sign({ user: user.id });
 
       response.status(200).json({ user, token });
     } catch (error) {
