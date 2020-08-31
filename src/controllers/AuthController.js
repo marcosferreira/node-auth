@@ -17,14 +17,19 @@ class AuthController {
   }
 
   async login(request, response) {
-    const { email, password } = request.body;
+    const [hashType, hash] = request.headers.authorization.split(' ');
+    const [email, password] = Buffer.from(hash, 'base64').toString().split(':');
 
     try {
       const user = await User.findOne({ email, password });
 
-      if (!user) return response.status(401);
+      if (!user) {
+        return response.status(401);
+      }
 
-      return response.status(200).json({ user });
+      const token = jwt.sign({ user: user.id });
+
+      return response.status(200).json({ user, token });
     } catch (error) {
       response.status(500).json({ error: error.message });
     }

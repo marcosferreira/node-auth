@@ -6,7 +6,6 @@ const routes = Router();
 const controllers = new Controller();
 
 routes.post('/signup', controllers.signup);
-routes.post('/login', controllers.login);
-routes.post('/forgot', controllers.forgotPassword);
+routes.get('/login', controllers.login);
 
 export default routes;
