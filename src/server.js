@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import app from '../src/app';
 
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_HOST}/${process.env.MONGODB_NAME}?retryWrites=true&w=majority`, {
+mongoose.connect(`${process.env.MONGODB_URL}`, {
   useUnifiedTopology: true,
   useCreateIndex: true,
   useNewUrlParser: true,
